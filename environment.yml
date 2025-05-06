@@ -1,0 +1,33 @@
+name: risk
+channels:
+        - defaults
+        - conda-forge
+dependencies:
+        - python=3.8
+        - numpy
+        - pandas
+        - xarray
+        - netcdf4
+        - matplotlib=3.3.1
+        - scikit-learn-intelex
+        - scipy
+        - statsmodels
+        - cmocean
+        - geopandas
+        - notebook
+        - termcolor
+        - contextily
+        - imageio
+        - ipyleaflet
+        - plotly
+        - cftime
+        - moviepy
+        - requests
+        - ipywidgets
+        - lxml
+        - rioxarray
+        - keplergl
+        - wget
+
+
+        
