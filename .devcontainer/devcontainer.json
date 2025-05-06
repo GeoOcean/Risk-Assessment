@@ -1,7 +1,8 @@
 {
   "name": "Conda_env",
   "build": {
-    "dockerfile": ".devcontainer/Dockerfile"
+    "context": "..",
+    "dockerfile": "Dockerfile"
   },
   "postCreateCommand": "pwd",
   "settings": {
