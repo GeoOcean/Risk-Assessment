@@ -12,13 +12,17 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     tzdata \
+    libgomp1 \
+    libnuma1 \
+    libnetcdf-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN ln -s /usr/lib/x86_64-linux-gnu/libnetcdf.so.15 /usr/lib/x86_64-linux-gnu/libnetcdf.so.13
 
 # Set working directory
 WORKDIR /workspace
 
 COPY environment.yml /tmp/environment.yml
-
     
 RUN mamba env create -f /tmp/environment.yml
 
