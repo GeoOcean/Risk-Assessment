@@ -1,0 +1,37 @@
+name: risk
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - xarray
+  - netcdf4
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - scipy
+  - statsmodels
+  - cmocean
+  - notebook
+  - ipywidgets
+  - plotly
+  - anywidget
+  - requests
+  - lxml
+  - ipykernel
+  - contextily
+  - wget
+
+  # 🔥 GIS STACK
+  - geopandas
+  - cartopy
+  - rioxarray
+  - rasterio
+  - fiona
+  - pyproj
+  - shapely
+  - gdal
+  - keplergl
