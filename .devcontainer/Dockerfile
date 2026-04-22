@@ -1,17 +1,33 @@
-FROM mcr.microsoft.com/devcontainers/miniconda:1-3
+FROM condaforge/mambaforge
 
-# Copy environment.yml (if found) to a temp location so we update the environment. Also
-# copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
-COPY environment.yml* /tmp/conda-tmp/
+# Avoid interactive prompts (tzdata, etc.)
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+ENV MAMBA_NO_BANNER=1
 
-RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-    && rm -rf /tmp/conda-tmp
+# System dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    openjdk-17-jdk \
+    wget \
+    unzip \
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
 
-# [Optional] Uncomment to install a different version of Python than the default
-#RUN conda install -y dask
-#     && pip install --no-cache-dir pipx \
-#     && pipx reinstall-all
+# Set working directory
+WORKDIR /workspace
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+COPY environment.yml /tmp/environment.yml
+
+    
+RUN mamba env create -f /tmp/environment.yml
+
+# Activate by default
+ENV CONDA_DEFAULT_ENV=risk
+ENV PATH=/opt/conda/envs/risk/bin:$PATH
+
+RUN python -m ipykernel install --name risk --display-name "Python (risk)"
+
+# Default shell
+SHELL ["/bin/bash", "-c"]
+RUN echo "conda activate risk" >> ~/.bashrc

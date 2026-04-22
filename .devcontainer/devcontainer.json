@@ -1,15 +1,41 @@
+// {
+//     "name": "Flood-risk",
+//     "image": "geoocean/classes-flood-risk:latest",
+//     "customizations": {
+//         "vscode": {
+//             "settings": {
+//                 "terminal.integrated.defaultProfile.linux": "bash"
+//             },
+//             "extensions": [
+//                 "ms-python.python",
+//                 "ms-toolsai.jupyter"
+//             ]
+//         }
+//     }
+// }
+
+
 {
-  "name": "Conda_env",
+  "name": "Flood Risk",
+
   "build": {
-    "context": "..",
     "dockerfile": "Dockerfile"
   },
-  "postCreateCommand": "pwd",
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/envs/risk/bin/python",
+        "jupyter.jupyterServerType": "local"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ]
+    }
   },
-  "extensions": [
-    "ms-python.python",
-    "ms-toolsai.jupyter"    
+
+  "mounts": [
+    "source=${localWorkspaceFolder}/data,target=/workspace/data,type=bind"
   ]
 }
